@@ -1,0 +1,25 @@
+@()(implicit request: MessagesRequest[_])
+
+    @defining(request.messages) { t =>
+        @shared.main(t("home.title")) {
+
+            <p>
+            @t("home.click.on.items.to.check.pages")
+            </p>
+
+
+            <p>
+            @t("home.main.menu.title")
+            </p>
+            <ul>
+                <li><a href="@routes.StudentsController.index()">@t("student.index.title")</a></li>
+                <li><a href="@routes.StudentsController.create()">@t("student.create.title")</a></li>
+            </ul>
+
+            <p>@t("home.language.menu.title")</p>
+            <ul>
+                <li><a href="@routes.HomeController.setEnglishLanguage()">@t("english.version")</a></li>
+                <li><a href="@routes.HomeController.setSpanishLanguage()">@t("spanish.version")</a></li>
+            </ul>
+        }
+    }

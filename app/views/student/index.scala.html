@@ -1,0 +1,39 @@
+@(students: List[models.domain.Student])(implicit request: MessagesRequest[_])
+
+@defining(request.messages) { t =>
+    @shared.main(t("student.index.title")) {
+        @if(students.nonEmpty){
+            <table>
+                <thead>
+                    <tr>
+                        <th>@t("student.attributes.firstName")</th>
+                        <th>@t("student.attributes.lastName")</th>
+                        <th>@t("student.attributes.birthDate")</th>
+                        <th>@t("student.attributes.gender")</th>
+                        <th>@t("student.attributes.phone")</th>
+                        <th>@t("student.attributes.addressCity")</th>
+                        <th>@t("student.attributes.notes")</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @students.map { student =>
+                    <tr>
+                        <td>@student.firstName</td>
+                        <td>@student.lastName</td>
+                        <td>@student.birthDate</td>
+                        <td>@t(student.gender.description)</td>
+                        <td>@student.phone</td>
+                        <td>@student.address.city</td>
+                        <td>@student.notes</td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        } else {
+            <h4>@t("student.no.records.found")</h4>
+        }
+        <p>
+            <a href="@routes.StudentsController.create()">Create new student</a>
+        </p>
+    }
+}

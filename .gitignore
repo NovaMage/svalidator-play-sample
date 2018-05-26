@@ -1,0 +1,12 @@
+*.orig
+logs
+target
+/.env
+/.idea
+/.idea_modules
+/.classpath
+/.project
+/.settings
+/RUNNING_PID
+/play.pid
+/project/project
