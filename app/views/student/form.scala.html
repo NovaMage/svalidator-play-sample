@@ -1,0 +1,19 @@
+@import com.github.novamage.svalidator.validation.binding.BindingAndValidationSummary
+@import models.forms.StudentForm
+@import com.github.novamage.svalidator.html.BindingAndValidationSummaryHelper.helper
+@import services.html.PlayBootstrap4HtmlFactory.factory
+@(summary: BindingAndValidationSummary[StudentForm], genderOptions: List[(Any, Any)], submitKey: String, t: Messages)
+
+@summary.textBox("firstName", _.firstName, t("student.attributes.firstName"))
+@summary.textBox("lastName", _.lastName, t("student.attributes.lastName"))
+@summary.textBox("birthDate", _.birthDate, t("student.attributes.birthDate"))
+@summary.radioGroup("gender", _.gender, genderOptions, t("student.attributes.gender"))
+@summary.textBox("phone", _.phone, t("student.attributes.phone"))
+@summary.checkBox("foreigner", _.foreigner, t("student.attributes.foreigner"))
+@summary.textArea("notes", _.notes, t("student.attributes.notes"))
+@summary.textBox("address.line1", _.address.line1, t("student.attributes.addressLine1"))
+@summary.textBox("address.line2", _.address.line2, t("student.attributes.addressLine2"))
+@summary.textBox("address.city", _.address.city, t("student.attributes.addressCity"))
+@summary.textBox("address.state", _.address.state, t("student.attributes.addressState"))
+@summary.textBox("address.zipCode", _.address.zipCode, t("student.attributes.addressZipCode"))
+@summary.submit("createStudent", t(submitKey))

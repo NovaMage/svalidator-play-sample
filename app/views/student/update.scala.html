@@ -1,1 +1,15 @@
-@()
+@(model: models.output.StudentUpdateOutput)(implicit request: MessagesRequest[_])
+@import services.html.PlayBootstrap4HtmlFactory.factory
+@import com.github.novamage.svalidator.html.BindingAndValidationSummaryHelper.helper
+
+@defining(request.messages) { t =>
+    @shared.main(t("student.update.title")) {
+        <p>
+            <a class="btn btn-primary" href="@routes.StudentsController.index()">@t("student.backToIndex")</a>
+        </p>
+        @factory.form(routes.StudentsController.postUpdate(model.id)) {
+            @model.summary.hidden("id", _.id)
+            @student.form(model.summary, model.genderOptions, "student.update.updateStudent", t)
+        }
+    }
+}

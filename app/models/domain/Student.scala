@@ -3,7 +3,6 @@ package models.domain
 import java.sql.Timestamp
 
 import models.enumerations.Gender
-import models.forms.AddressForm
 
 case class Student(id: Long,
                    firstName: String,
@@ -11,7 +10,8 @@ case class Student(id: Long,
                    birthDate: Timestamp,
                    gender: Gender,
                    phone: String,
+                   foreigner: Boolean,
                    notes: Option[String],
-                   address: AddressForm) {
+                   address: Address) {
 
 }

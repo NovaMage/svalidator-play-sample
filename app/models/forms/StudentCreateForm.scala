@@ -2,6 +2,7 @@ package models.forms
 
 import java.sql.Timestamp
 
+import models.domain.Address
 import models.enumerations.Gender
 
 case class StudentCreateForm(firstName: String,
@@ -9,7 +10,8 @@ case class StudentCreateForm(firstName: String,
                              birthDate: Timestamp,
                              gender: Gender,
                              phone: String,
+                             foreigner: Boolean,
                              notes: Option[String],
-                             address: AddressForm) {
+                             address: Address) extends StudentForm {
 
 }

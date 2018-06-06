@@ -1,9 +1,10 @@
+@import infrastructure.StartUpConfigurator
 @(students: List[models.domain.Student])(implicit request: MessagesRequest[_])
 
 @defining(request.messages) { t =>
     @shared.main(t("student.index.title")) {
         @if(students.nonEmpty){
-            <table>
+            <table class="table table-bordered text-center">
                 <thead>
                     <tr>
                         <th>@t("student.attributes.firstName")</th>
@@ -13,6 +14,7 @@
                         <th>@t("student.attributes.phone")</th>
                         <th>@t("student.attributes.addressCity")</th>
                         <th>@t("student.attributes.notes")</th>
+                        <th>@t("edit")</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -20,11 +22,12 @@
                     <tr>
                         <td>@student.firstName</td>
                         <td>@student.lastName</td>
-                        <td>@student.birthDate</td>
+                        <td>@student.birthDate.format(StartUpConfigurator.dateFormat)</td>
                         <td>@t(student.gender.description)</td>
                         <td>@student.phone</td>
                         <td>@student.address.city</td>
                         <td>@student.notes</td>
+                        <td><a href="@routes.StudentsController.update(student.id)">@t("edit")</a></td>
                     </tr>
                 }
                 </tbody>
@@ -33,7 +36,8 @@
             <h4>@t("student.no.records.found")</h4>
         }
         <p>
-            <a href="@routes.StudentsController.create()">Create new student</a>
+            <a class="btn btn-primary" href="@routes.HomeController.index()">@t("home.back")</a>
+            <a class="btn btn-primary" href="@routes.StudentsController.create()">@t("student.create.createStudent")</a>
         </p>
     }
 }

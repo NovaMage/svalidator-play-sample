@@ -4,6 +4,6 @@ import com.github.novamage.svalidator.validation.binding.BindingAndValidationSum
 import models.forms.StudentCreateForm
 
 case class StudentCreateOutput(summary: BindingAndValidationSummary[StudentCreateForm],
-                               genderOptions: List[(Int, String)]) {
+                               genderOptions: List[(Int, String)])  {
 
 }

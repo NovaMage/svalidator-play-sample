@@ -1,0 +1,32 @@
+body {
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-top: 15px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 16px;
+    line-height: 1.42857143;
+    color: #333;
+    background-color: #fff;
+}
+
+.form-group .invalid-feedback {
+    display: block;
+    border: 1px dotted red;
+    border-radius: 8px;
+    background: #fee;
+    text-align: center;
+}
+
+.invalid-feedback ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.invalid-feedback {
+    color: #a94442;
+}
+
+.was-validated .form-control:invalid, .form-control.is-invalid, .was-validated .custom-select:invalid, .custom-select.is-invalid {
+    border-color: #a94442;
+}
