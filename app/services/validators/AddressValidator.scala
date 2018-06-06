@@ -11,13 +11,13 @@ class AddressValidator extends SimpleValidator[Address] {
     val maxCharsForCityAndState = 32
     WithRules(
       For { _.line1 } ForField 'line1
-        must { _.length <= maxCharsForStreetFields } withFormattedMessage("validation.general.maxCharactersExceeded", maxCharsForStreetFields),
+        must { _.length <= maxCharsForStreetFields } withMessage("validation.general.maxCharactersExceeded", maxCharsForStreetFields),
       ForOptional { _.line2 } ForField 'line2
-        must { _.length <= maxCharsForStreetFields } withFormattedMessage("validation.general.maxCharactersExceeded", maxCharsForStreetFields),
+        must { _.length <= maxCharsForStreetFields } withMessage("validation.general.maxCharactersExceeded", maxCharsForStreetFields),
       For { _.city } ForField 'city
-        must { _.length <= maxCharsForCityAndState } withFormattedMessage("validation.general.maxCharactersExceeded", maxCharsForCityAndState),
+        must { _.length <= maxCharsForCityAndState } withMessage("validation.general.maxCharactersExceeded", maxCharsForCityAndState),
       For { _.state } ForField 'city
-        must { _.length <= maxCharsForCityAndState } withFormattedMessage("validation.general.maxCharactersExceeded", maxCharsForCityAndState),
+        must { _.length <= maxCharsForCityAndState } withMessage("validation.general.maxCharactersExceeded", maxCharsForCityAndState),
       For { _.zipCode } ForField 'zipCode
         must { _.length == 5 } withMessage "validation.address.invalidZipCode"
         must { _.forall(_.isDigit) } withMessage "validation.address.invalidZipCode"

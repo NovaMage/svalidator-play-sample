@@ -21,15 +21,15 @@ class StudentValidator @Inject()(addressValidator: AddressValidator) extends Sim
     val maxCharsForNotes = 512
     WithRules(
       For { _.firstName } ForField 'firstName
-        must { _.length <= maxCharsForNameFields } withFormattedMessage("validation.general.maxCharactersExceeded", maxCharsForNameFields),
+        must { _.length <= maxCharsForNameFields } withMessage("validation.general.maxCharactersExceeded", maxCharsForNameFields),
       For { _.lastName } ForField 'lastName
-        must { _.length <= maxCharsForNameFields } withFormattedMessage("validation.general.maxCharactersExceeded", maxCharsForNameFields),
+        must { _.length <= maxCharsForNameFields } withMessage("validation.general.maxCharactersExceeded", maxCharsForNameFields),
       For { _.birthDate } ForField 'birthDate
-        mustNot beOlderThan(maxStudentAge) withFormattedMessage("validation.student.studentTooOld", maxStudentAge),
+        mustNot beOlderThan(maxStudentAge) withMessage("validation.student.studentTooOld", maxStudentAge),
       For { _.phone } ForField 'phone
         must beAValidPhone withMessage "validation.general.invalidPhone",
       ForOptional { _.notes } ForField 'notes
-        must { _.length <= maxCharsForNotes } withFormattedMessage("validation.general.maxCharactersExceeded", maxCharsForNameFields),
+        must { _.length <= maxCharsForNotes } withMessage("validation.general.maxCharactersExceeded", maxCharsForNameFields),
       ForComponent { _.address } ForField 'address
         validateUsing addressValidator
 
