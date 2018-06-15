@@ -1,6 +1,6 @@
 name := "svalidator-play-sample"
 
-version := "0.1.0"
+version := "0.9.15"
 
 organization := "com.github.novamage"
 

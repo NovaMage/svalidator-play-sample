@@ -7,9 +7,7 @@
             <a class="btn btn-primary" href="@routes.StudentsController.index()">@t("student.backToIndex")</a>
         </p>
         @factory.form(routes.StudentsController.postCreate()) {
-            @defining(model.summary) { summary =>
-                @student.form(model.summary, model.genderOptions, "student.create.createStudent", t)
-            }
+            @student.form(model.summary, model.genderOptions, "student.create.createStudent", t)
         }
     }
 }

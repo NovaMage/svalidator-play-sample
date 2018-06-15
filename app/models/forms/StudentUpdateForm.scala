@@ -1,7 +1,6 @@
 package models.forms
 
 import java.sql.Timestamp
-
 import models.domain.Address
 import models.enumerations.Gender
 
