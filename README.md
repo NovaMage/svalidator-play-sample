@@ -49,7 +49,7 @@ object StartUpConfigurator {
 }
 ```
 
-That sets up binding.  Now, for the html helpers to work in the desired way, it's necessary to implement an HTML that 
+That sets up binding.  Now, for the html helpers to work in the desired way, it's necessary to implement an `HTMLFactory` that 
 fits our intended setup, in this case, Bootstrap 4.
 
 ```scala
