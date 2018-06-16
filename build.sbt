@@ -1,6 +1,6 @@
 name := "svalidator-play-sample"
 
-version := "0.9.15"
+version := "1.0.0"
 
 organization := "com.github.novamage"
 
@@ -21,7 +21,7 @@ lazy val root = (project in file("."))
   .enablePlugins(PlayScala, LauncherJarPlugin)
 
 
-libraryDependencies += "com.github.novamage" %% "svalidator-play" % "0.9.15"
+libraryDependencies += "com.github.novamage" %% "svalidator-play" % "1.0.0"
 
 libraryDependencies += guice
 

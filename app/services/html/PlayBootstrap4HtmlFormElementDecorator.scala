@@ -73,6 +73,7 @@ object PlayBootstrap4HtmlFormElementDecorator extends HtmlFormElementDecorator {
                                         id: String,
                                         name: String,
                                         label: String,
+                                        index: Int,
                                         attributes: Map[String, Any]): String = {
     s"""
        |<div class="custom-control custom-radio custom-control-inline">
@@ -92,6 +93,7 @@ object PlayBootstrap4HtmlFormElementDecorator extends HtmlFormElementDecorator {
                                            id: String,
                                            name: String,
                                            label: String,
+                                           index: Int,
                                            attributes: Map[String, Any]): String = {
     s"""
        |<div class="custom-control custom-checkbox custom-control-inline">
