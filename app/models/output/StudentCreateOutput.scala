@@ -1,9 +1,9 @@
 package models.output
 
-import com.github.novamage.svalidator.validation.binding.BindingAndValidationSummary
+import com.github.novamage.svalidator.validation.binding.BindingAndValidationWithData
 import models.forms.StudentCreateForm
 
-case class StudentCreateOutput(summary: BindingAndValidationSummary[StudentCreateForm],
+case class StudentCreateOutput(summary: BindingAndValidationWithData[StudentCreateForm, List[Any]],
                                genderOptions: List[(Int, String)])  {
 
 }

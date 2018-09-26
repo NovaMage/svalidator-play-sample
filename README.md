@@ -159,8 +159,8 @@ case class StudentUpdateForm(id: Long,
                           address: Address) extends StudentForm
 ```
 
-We extend the common `StudentForm` trait to allow us to pass a `BindingAndValidationSummary[StudentForm]` to our shared
-form template that will be used for both the `create` and `update` actions.  `BindingAndValidationSumary` is covariant 
+We extend the common `StudentForm` trait to allow us to pass a `BindingAndValidationWithData[StudentForm, Nothing]` to our shared
+form template that will be used for both the `create` and `update` actions.  `BindingAndValidationWithData` is covariant 
 on its type argument therefore summaries of classes that extend the type argument will also be allowed in place.
 
 Now, the views of our forms:
@@ -208,11 +208,11 @@ Our form pages are pretty simple, as they mostly reuse the entire form as a part
 and passing in the appropriate options.  Now, for the form itself:
 
 ```html
-@import com.github.novamage.svalidator.validation.binding.BindingAndValidationSummary
+@import com.github.novamage.svalidator.validation.binding.BindingAndValidationWithData
 @import models.forms.StudentForm
 @import com.github.novamage.svalidator.html.BindingAndValidationSummaryHelper.helper
 @import services.html.PlayBootstrap4HtmlFactory.factory
-@(summary: BindingAndValidationSummary[StudentForm], genderOptions: List[(Any, Any)], submitKey: String, t: Messages)
+@(summary: BindingAndValidationWithData[StudentForm, List[Any]], genderOptions: List[(Any, Any)], submitKey: String, t: Messages)
 
 @summary.textBox("firstName", _.firstName, t("student.attributes.firstName"))
 @summary.textBox("lastName", _.lastName, t("student.attributes.lastName"))
@@ -255,15 +255,15 @@ we re-render the form with the failing summary.  The validator applied here look
 ```scala
 package services.validators
 
-import com.github.novamage.svalidator.play.binding.PlayBindingValidator
-import com.github.novamage.svalidator.validation.ValidationSummary
+import com.github.novamage.svalidator.play.binding.PlayBindingValidatorWithData
+import com.github.novamage.svalidator.validation.ValidationWithData
 import javax.inject.Inject
 import models.forms.StudentCreateForm
 import services.repositories.StudentRepository
 
-class StudentCreateValidator @Inject()(studentValidator: StudentValidator) extends PlayBindingValidator[StudentCreateForm] {
+class StudentCreateValidator @Inject()(studentValidator: StudentValidator) extends PlayBindingValidatorWithData[StudentCreateForm, List[Any]] {
 
-  override def validate(implicit instance: StudentCreateForm): ValidationSummary = {
+  override def validate(implicit instance: StudentCreateForm): ValidationWithData[List[Any]] = {
     /*
     If this repository required db access, it would be preferable to avoid hitting the database twice,
     so we check existence only once before giving the error to both fields
@@ -292,14 +292,14 @@ package services.validators
 
 import java.sql.Timestamp
 import java.time.LocalDateTime
-import com.github.novamage.svalidator.validation.ValidationSummary
+import com.github.novamage.svalidator.validation.ValidationWithData
 import com.github.novamage.svalidator.validation.simple.SimpleValidator
 import javax.inject.Inject
 import models.forms.StudentForm
 
 class StudentValidator @Inject()(addressValidator: AddressValidator) extends SimpleValidator[StudentForm] {
 
-  override def validate(implicit instance: StudentForm): ValidationSummary = {
+  override def validate(implicit instance: StudentForm): ValidationWithData[Nothing] = {
     val maxCharsForNameFields = 32
     val maxStudentAge = 18
     val maxCharsForNotes = 512

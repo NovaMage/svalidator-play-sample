@@ -3,7 +3,7 @@ package services.validators
 import java.sql.Timestamp
 import java.time.LocalDateTime
 
-import com.github.novamage.svalidator.validation.ValidationSummary
+import com.github.novamage.svalidator.validation.ValidationWithData
 import com.github.novamage.svalidator.validation.simple.SimpleValidator
 import javax.inject.Inject
 import models.forms.StudentForm
@@ -15,7 +15,7 @@ import models.forms.StudentForm
   */
 class StudentValidator @Inject()(addressValidator: AddressValidator) extends SimpleValidator[StudentForm] {
 
-  override def validate(implicit instance: StudentForm): ValidationSummary = {
+  override def validate(implicit instance: StudentForm): ValidationWithData[Nothing] = {
     val maxCharsForNameFields = 32
     val maxStudentAge = 18
     val maxCharsForNotes = 512

@@ -1,8 +1,8 @@
-@import com.github.novamage.svalidator.validation.binding.BindingAndValidationSummary
+@import com.github.novamage.svalidator.validation.binding.BindingAndValidationWithData
 @import models.forms.StudentForm
 @import com.github.novamage.svalidator.html.BindingAndValidationSummaryHelper.helper
 @import services.html.PlayBootstrap4HtmlFactory.factory
-@(summary: BindingAndValidationSummary[StudentForm], genderOptions: List[(Any, Any)], submitKey: String, t: Messages)
+@(summary: BindingAndValidationWithData[StudentForm, List[Any]], genderOptions: List[(Any, Any)], submitKey: String, t: Messages)
 
 @summary.textBox("firstName", _.firstName, t("student.attributes.firstName"))
 @summary.textBox("lastName", _.lastName, t("student.attributes.lastName"))

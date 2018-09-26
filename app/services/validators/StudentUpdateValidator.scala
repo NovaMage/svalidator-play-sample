@@ -1,14 +1,14 @@
 package services.validators
 
-import com.github.novamage.svalidator.play.binding.PlayBindingValidator
-import com.github.novamage.svalidator.validation.ValidationSummary
+import com.github.novamage.svalidator.play.binding.PlayBindingValidatorWithData
+import com.github.novamage.svalidator.validation.ValidationWithData
 import javax.inject.Inject
 import models.forms.StudentUpdateForm
 import services.repositories.StudentRepository
 
-class StudentUpdateValidator @Inject()(studentValidator: StudentValidator) extends PlayBindingValidator[StudentUpdateForm] {
+class StudentUpdateValidator @Inject()(studentValidator: StudentValidator) extends PlayBindingValidatorWithData[StudentUpdateForm, List[Any]] {
 
-  override def validate(implicit instance: StudentUpdateForm): ValidationSummary = {
+  override def validate(implicit instance: StudentUpdateForm): ValidationWithData[List[Any]] = {
     /*
     If this repository required db access, it would be preferable to avoid hitting the database twice,
     so we check existence only once before giving the error to both fields
