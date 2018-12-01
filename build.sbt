@@ -1,12 +1,12 @@
 name := "svalidator-play-sample"
 
-version := "2.0.1"
+version := "2.1.0"
 
 organization := "com.github.novamage"
 
 description := "A play scala application showcasing the use of the svalidator-play library integration"
 
-scalaVersion := "2.12.6"
+scalaVersion := "2.12.7"
 
 scalacOptions ++= Seq(
   "-deprecation",
@@ -21,7 +21,7 @@ lazy val root = (project in file("."))
   .enablePlugins(PlayScala, LauncherJarPlugin)
 
 
-libraryDependencies += "com.github.novamage" %% "svalidator-play" % "2.0.1"
+libraryDependencies += "com.github.novamage" %% "svalidator-play" % "2.1.0"
 
 libraryDependencies += guice
 
