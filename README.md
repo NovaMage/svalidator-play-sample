@@ -255,23 +255,18 @@ we re-render the form with the failing summary.  The validator applied here look
 ```scala
 package services.validators
 
-import com.github.novamage.svalidator.play.binding.PlayBindingValidatorWithData
-import com.github.novamage.svalidator.validation.ValidationWithData
+import com.github.novamage.svalidator.play.binding.PlayBindingValidator
+import com.github.novamage.svalidator.validation.ValidationSummary
 import javax.inject.Inject
 import models.forms.StudentCreateForm
 import services.repositories.StudentRepository
 
-class StudentCreateValidator @Inject()(studentValidator: StudentValidator) extends PlayBindingValidatorWithData[StudentCreateForm, List[Any]] {
+class StudentCreateValidator @Inject()(studentValidator: StudentValidator) extends PlayBindingValidator[StudentCreateForm] {
 
-  override def validate(implicit instance: StudentCreateForm): ValidationWithData[List[Any]] = {
-    /*
-    If this repository required db access, it would be preferable to avoid hitting the database twice,
-    so we check existence only once before giving the error to both fields
-    Another alternative is to give the error only once to a field with different name that represents the combination
-    of both
-    */
+  override def validate(implicit instance: StudentCreateForm): ValidationSummary = {
+  
     val studentAlreadyExists = StudentRepository.hasWithNames(instance.firstName, instance.lastName)
-    studentValidator.validate.merge(
+    studentValidator.validate.mergeWithoutData(
       WithRules(
         For { _ => studentAlreadyExists } ForField 'firstName
           mustNot identity withMessage "validation.student.studentAlreadyRegistered",
@@ -280,7 +275,6 @@ class StudentCreateValidator @Inject()(studentValidator: StudentValidator) exten
       )
     )
   }
-
 }
 ```
 
@@ -292,14 +286,15 @@ package services.validators
 
 import java.sql.Timestamp
 import java.time.LocalDateTime
-import com.github.novamage.svalidator.validation.ValidationWithData
+
+import com.github.novamage.svalidator.validation.ValidationSummary
 import com.github.novamage.svalidator.validation.simple.SimpleValidator
 import javax.inject.Inject
 import models.forms.StudentForm
 
 class StudentValidator @Inject()(addressValidator: AddressValidator) extends SimpleValidator[StudentForm] {
 
-  override def validate(implicit instance: StudentForm): ValidationWithData[Nothing] = {
+  override def validate(implicit instance: StudentForm): ValidationSummary = {
     val maxCharsForNameFields = 32
     val maxStudentAge = 18
     val maxCharsForNotes = 512
@@ -328,6 +323,7 @@ class StudentValidator @Inject()(addressValidator: AddressValidator) extends Sim
   private def beAValidPhone(phone: String): Boolean = {
     phone.length == 10 && phone.forall(_.isDigit)
   }
+
 }
 ```
 

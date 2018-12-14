@@ -1,12 +1,12 @@
 package services.validators
 
-import com.github.novamage.svalidator.validation.ValidationWithData
+import com.github.novamage.svalidator.validation.ValidationSummary
 import com.github.novamage.svalidator.validation.simple.SimpleValidator
 import models.domain.Address
 
 class AddressValidator extends SimpleValidator[Address] {
 
-  override def validate(implicit instance: Address): ValidationWithData[Nothing] = {
+  override def validate(implicit instance: Address): ValidationSummary = {
     val maxCharsForStreetFields = 64
     val maxCharsForCityAndState = 32
     WithRules(
